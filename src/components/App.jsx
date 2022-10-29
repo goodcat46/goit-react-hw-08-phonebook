@@ -15,10 +15,13 @@ export const App = () => {
   const { token, isLoged } = useSelector(selectUserData);
   // console.log(token);
   useEffect(() => {
-    if ( token) {
+    if (isLoged) {
+      return;
+    }
+    if (token) {
       dispatch(authThunks.current());
     }
-  }, [dispatch, token, ]);
+  }, [dispatch, isLoged, token]);
 
   return (
     <div className={css.app}>

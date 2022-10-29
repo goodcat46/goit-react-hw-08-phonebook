@@ -41,9 +41,6 @@ const SignInPage = () => {
       authThunks.logIn({ email: values.email, password: values.password })
     );
   };
-  const handleLogOut = () => {
-    dispatch(authThunks.logOut());
-  };
   return (
     <>
       <div className={scss.signInPage}>
@@ -88,15 +85,9 @@ const SignInPage = () => {
               label="Password"
             />
           </FormControl>
-          {userInfo.isLoged ? (
-            <Button variant="contained" type="button" onClick={handleLogOut}>
-              Log Out
-            </Button>
-          ) : (
-            <Button variant="contained" type="submit">
-              Sign In
-            </Button>
-          )}
+          <Button variant="contained" type="submit">
+            Sign In
+          </Button>
         </form>
       </div>
     </>
