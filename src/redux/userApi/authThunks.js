@@ -1,5 +1,14 @@
-import userApi from './userApi';
+import userApi from '../../services/userApi';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
+const token = {
+  set(token) {
+    userApi.defaults.headers.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    userApi.defaults.headers.Authorization = ``;
+  },
+};
 
 const userRegister = createAsyncThunk(
   'auth/register',
@@ -24,33 +33,41 @@ const userLogIn = createAsyncThunk(
         email: email,
         password: password,
       });
+      token.set(response.data.token);
       return response.data;
     } catch (error) {
       console.log(error);
     }
   }
 );
+
 const userLogOut = createAsyncThunk('auth/logout', async () => {
   try {
-    const response = await userApi.post(`/users/logout`);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-});
-const userCurrent = createAsyncThunk('auth/current', async () => {
-  try {
-    const response = await userApi.post(`/users/current`);
-    return response;
+    await userApi.post(`/users/logout`);
+    token.unset();
   } catch (error) {
     console.log(error);
   }
 });
 
-const authOparations = {
+const userCurrent = createAsyncThunk(
+  'auth/current',
+  async (_, { getState }) => {
+    token.set(getState().token);
+
+    try {
+      const { data } = await userApi.get(`/users/current`);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+const authThunks = {
   register: userRegister,
   logIn: userLogIn,
   logOut: userLogOut,
   current: userCurrent,
 };
-export default authOparations;
+export default authThunks;

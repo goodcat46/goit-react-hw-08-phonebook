@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import authOparations from './authOperations';
-console.log(authOparations);
+import authThunks from './authThunks';
 
 const initialState = {
   user: { name: '', email: '' },
@@ -15,58 +14,59 @@ export const userAuthSlice = createSlice({
   initialState,
   extraReducers: {
     //* РЕЄСТРАЦІЯ
-    [authOparations.register.fulfilled]: (state, { payload }) => {
+    [authThunks.register.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
+      state.isLoged = false;
       state.user = payload.user;
       state.token = payload.token;
     },
-    [authOparations.register.rejected]: (state, action) => {
+    [authThunks.register.rejected]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
     },
-    [authOparations.register.pending]: (state, action) => {
+    [authThunks.register.pending]: (state, action) => {
       state.isLoading = true;
     },
     //* ВХІД
-    [authOparations.logIn.fulfilled]: (state, { payload }) => {
+    [authThunks.logIn.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.isLoged = true;
       state.user = payload.user;
       state.token = payload.token;
     },
-    [authOparations.logIn.rejected]: (state, { payload }) => {
+    [authThunks.logIn.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.isLoged = false;
       console.log(payload);
     },
-    [authOparations.logIn.pending]: (state, { payload }) => {
+    [authThunks.logIn.pending]: (state, { payload }) => {
       state.isLoading = true;
     },
     //* ВИХІД
-    [authOparations.logOut.fulfilled]: (state, action) => {
+    [authThunks.logOut.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isLoged = false;
       state.user.name = '';
       state.user.email = '';
       state.token = null;
-      console.log(action)
+      console.log(action);
     },
-    [authOparations.logOut.rejected]: (state, action) => {
+    [authThunks.logOut.rejected]: (state, action) => {
       state.isLoading = true;
     },
-    [authOparations.logOut.pending]: (state, action) => {
+    [authThunks.logOut.pending]: (state, action) => {
       state.isLoading = true;
     },
     //* ПОТОЧНИЙ ЮЗЕР
-    [authOparations.current.fulfilled]: (state, action) => {
+    [authThunks.current.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.isLoged = true;
+      state.user = payload;
+    },
+    [authThunks.current.rejected]: (state, action) => {
       state.isLoading = false;
       console.log(state, action);
     },
-    [authOparations.current.rejected]: (state, action) => {
-      state.isLoading = false;
-      console.log(state, action);
-    },
-    [authOparations.current.pending]: (state, action) => {
+    [authThunks.current.pending]: (state, action) => {
       state.isLoading = true;
     },
   },

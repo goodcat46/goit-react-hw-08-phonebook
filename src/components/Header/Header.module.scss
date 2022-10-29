@@ -1,0 +1,18 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  background-color: #fff;
+}
+.UserInfo{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

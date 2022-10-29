@@ -9,7 +9,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import authOparations from 'redux/userApi/authOperations';
+import authThunks from 'redux/userApi/authThunks';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignInPage.module.scss';
@@ -38,17 +38,11 @@ const SignInPage = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
     dispatch(
-      authOparations.logIn({ email: values.email, password: values.password })
+      authThunks.logIn({ email: values.email, password: values.password })
     );
-    // dispatch(
-    //   authOparations.logOut()
-    // );
-    // dispatch(
-    //   authOparations.current()
-    // );
   };
   const handleLogOut = () => {
-    dispatch(authOparations.logOut());
+    dispatch(authThunks.logOut());
   };
   return (
     <>

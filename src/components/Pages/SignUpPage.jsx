@@ -8,12 +8,11 @@ import {
   OutlinedInput,
   IconButton,
 } from '@mui/material';
-import authOparations from 'redux/userApi/authOperations';
+import authThunks from 'redux/userApi/authThunks';
 import { useDispatch } from 'react-redux';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignUpPage.module.scss';
-// userAuthSlice({name:'tester',email: 'fvsdfvsd@aevs.asdf',password:'fasdvsvd'})
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(true);
@@ -38,7 +37,7 @@ const SignUpPage = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
     dispatch(
-      authOparations.register({
+      authThunks.register({
         name: values.login,
         email: values.email,
         password: values.password,
