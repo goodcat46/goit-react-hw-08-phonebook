@@ -10,11 +10,13 @@ export const App = () => {
   return (
     <div className={css.app}>
       <div className={css.appContainer}>
-        <Routes>
-          <Route path="/signUp" element={<SignUpPage />} />
+      <SignUpPage />
+      <SignInPage />
+        {/* <Routes>
+          <Route path="/" element={<SignUpPage />} />
           <Route path="/signIn" element={<SignInPage />} />
-          <Route path="/" element={<MainPage />} />
-        </Routes>
+          <Route path="/signUp" element={<MainPage />} />
+        </Routes> */}
       </div>
     </div>
   );

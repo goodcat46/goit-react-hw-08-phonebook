@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import { deepPurple } from '@mui/material/colors';
 
 const LetterAvatar = ({ login }) => {
+
   return (
     <Avatar sx={{ bgcolor: deepPurple[500] }}>
+      {/* {userName ? userName[0].toUpperCase() : null} */}
       {login ? login[0].toUpperCase() : null}
     </Avatar>
   );

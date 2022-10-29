@@ -8,17 +8,23 @@ import {
   OutlinedInput,
   IconButton,
 } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import authOparations from 'redux/userApi/authOperations';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignInPage.module.scss';
-
+import { useSelector } from 'react-redux';
+import { selectUserData } from 'redux/userApi/userSelectors';
 const SignInPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
   const [values, setValues] = useState({
-    login: '',
     email: '',
     password: '',
   });
+  const userInfo = useSelector(selectUserData);
+  const userName = userInfo.isLoged ? userInfo.user.name : null;
+  const dispatch = useDispatch();
+
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -31,25 +37,29 @@ const SignInPage = () => {
   };
   const handleSubmit = evt => {
     evt.preventDefault();
+    dispatch(
+      authOparations.logIn({ email: values.email, password: values.password })
+    );
+    // dispatch(
+    //   authOparations.logOut()
+    // );
+    // dispatch(
+    //   authOparations.current()
+    // );
+  };
+  const handleLogOut = () => {
+    dispatch(authOparations.logOut());
   };
   return (
     <>
       <div className={scss.signInPage}>
         <div className={scss.userInfo}>
-          <LetterAvatar login={values.login} />
-          <p className={scss.userName}>{values.login?values.login:'User Name'}</p>
+          <LetterAvatar login={userName} />
+          <p className={scss.userName}>
+            {values.login ? values.login : 'User Name'}
+          </p>
         </div>
         <form className={scss.signInForm} onSubmit={handleSubmit}>
-          <FormControl sx={{ width: '100%' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-login">Login</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-login"
-              type={'text'}
-              value={values.login}
-              onChange={handleChange('login')}
-              label="Login"
-            />
-          </FormControl>
           <FormControl sx={{ width: '100%' }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
             <OutlinedInput
@@ -84,9 +94,15 @@ const SignInPage = () => {
               label="Password"
             />
           </FormControl>
-          <Button variant="contained" type="submit">
-            Sign In
-          </Button>
+          {userInfo.isLoged ? (
+            <Button variant="contained" type="button" onClick={handleLogOut}>
+              Log Out
+            </Button>
+          ) : (
+            <Button variant="contained" type="submit">
+              Sign In
+            </Button>
+          )}
         </form>
       </div>
     </>
