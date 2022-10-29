@@ -53,8 +53,7 @@ const userLogOut = createAsyncThunk('auth/logout', async () => {
 const userCurrent = createAsyncThunk(
   'auth/current',
   async (_, { getState }) => {
-    token.set(getState().token);
-
+    token.set(getState().user.token);
     try {
       const { data } = await userApi.get(`/users/current`);
       return data;

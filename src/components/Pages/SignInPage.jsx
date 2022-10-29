@@ -13,16 +13,12 @@ import authThunks from 'redux/userApi/authThunks';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignInPage.module.scss';
-import { useSelector } from 'react-redux';
-import { selectUserData } from 'redux/userApi/userSelectors';
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [values, setValues] = useState({
     email: '',
     password: '',
   });
-  const userInfo = useSelector(selectUserData);
-  const userName = userInfo.isLoged ? userInfo.user.name : null;
   const dispatch = useDispatch();
 
   const handleChange = prop => event => {
@@ -45,7 +41,7 @@ const SignInPage = () => {
     <>
       <div className={scss.signInPage}>
         <div className={scss.userInfo}>
-          <LetterAvatar login={userName} />
+          <LetterAvatar />
           <p className={scss.userName}>
             {values.login ? values.login : 'User Name'}
           </p>
@@ -59,6 +55,7 @@ const SignInPage = () => {
               value={values.email}
               onChange={handleChange('email')}
               label="Email"
+              required
             />
           </FormControl>
           <FormControl sx={{ width: '100%' }} variant="outlined">
@@ -83,6 +80,7 @@ const SignInPage = () => {
                 </InputAdornment>
               }
               label="Password"
+              required
             />
           </FormControl>
           <Button variant="contained" type="submit">

@@ -4,6 +4,7 @@ import Header from './Header/Header';
 import MainPage from './Pages/MainPage';
 import SignUpPage from './Pages/SignUpPage';
 import SignInPage from './Pages/SignInPage';
+import NotFoundPage from './Pages/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
 import authThunks from 'redux/userApi/authThunks';
 import { selectUserData } from 'redux/userApi/userSelectors';
@@ -13,11 +14,8 @@ import css from './app.module.scss';
 export const App = () => {
   const dispatch = useDispatch();
   const { token, isLoged } = useSelector(selectUserData);
-  // console.log(token);
+
   useEffect(() => {
-    if (isLoged) {
-      return;
-    }
     if (token) {
       dispatch(authThunks.current());
     }
@@ -27,13 +25,17 @@ export const App = () => {
     <div className={css.app}>
       <div className={css.appContainer}>
         <Header />
-        <SignUpPage />
-        <SignInPage />
-        {/* <Routes>
+        {/* {isLoged ? <MainPage /> : <SignInPage />} */}
+        <Routes>
           <Route path="/signUp" element={<SignUpPage />} />
-          <Route path="/signIn" element={<SignInPage />} />
-          <Route path="/user/:id" element={<MainPage />} />
-        </Routes> */}
+          {/* <Route path="/" element={<MainPage />} /> */}
+          {isLoged ? (
+            <Route path="/" element={<MainPage />} />
+          ) : (
+            <Route path="/" element={<SignInPage />} />
+          )}
+          <Route path='*' element={<NotFoundPage/>}/>
+        </Routes>
       </div>
     </div>
   );

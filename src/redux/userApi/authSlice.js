@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import authThunks from './authThunks';
 
 const initialState = {
-  user: { name: '', email: '' },
+  user: { name: null, email: null },
   token: null,
   isLoged: false,
   error: null,
@@ -36,7 +36,6 @@ export const userAuthSlice = createSlice({
     [authThunks.logIn.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.isLoged = false;
-      console.log(payload);
     },
     [authThunks.logIn.pending]: (state, { payload }) => {
       state.isLoading = true;
@@ -45,10 +44,8 @@ export const userAuthSlice = createSlice({
     [authThunks.logOut.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isLoged = false;
-      state.user.name = '';
-      state.user.email = '';
+      state.user = initialState.user;
       state.token = null;
-      console.log(action);
     },
     [authThunks.logOut.rejected]: (state, action) => {
       state.isLoading = true;
@@ -64,7 +61,6 @@ export const userAuthSlice = createSlice({
     },
     [authThunks.current.rejected]: (state, action) => {
       state.isLoading = false;
-      console.log(state, action);
     },
     [authThunks.current.pending]: (state, action) => {
       state.isLoading = true;

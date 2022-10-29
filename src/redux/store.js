@@ -1,6 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
+import { combineReducers } from '@reduxjs/toolkit';
+import { filterReducer } from './slices/sliceFilter';
 import { userReducer } from './userApi/authSlice';
+import { contactsReducer } from './slices/sliceContacts';
 import {
   persistStore,
   persistReducer,
@@ -19,10 +22,16 @@ const persistConfig = {
   whitelist: ['token'],
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const persistedUserReducer = persistReducer(persistConfig, userReducer);
+
+const rootReducer = combineReducers({
+  contacts: contactsReducer,
+  filter: filterReducer,
+  user: persistedUserReducer,
+});
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   initialState,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

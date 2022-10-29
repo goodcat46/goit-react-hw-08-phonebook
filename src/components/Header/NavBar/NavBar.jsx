@@ -10,10 +10,10 @@ import scss from './NavBar.module.scss';
 
 const NavBar = () => {
   const { isLoged } = useSelector(selectUserData);
-const dispatch = useDispatch()
-  const handleLogOutClick=()=>{
-    dispatch(authThunks.logOut())
-  }
+  const dispatch = useDispatch();
+  const handleLogOutClick = () => {
+    dispatch(authThunks.logOut());
+  };
 
   return (
     <div className={scss.NavBar}>
