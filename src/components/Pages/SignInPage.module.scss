@@ -1,0 +1,27 @@
+.signInPage{
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 8px;
+
+  width: 100%;
+}
+.userInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+
+}
+.user{}
+.signInForm{
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 8px;
+
+  min-width: 220px;
+  width: 100%;
+  max-width: 480px;
+}
