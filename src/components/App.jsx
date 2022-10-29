@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Routes, Route } from 'react-router-dom';
 import MainPage from './Pages/MainPage';
 import SignUpPage from './Pages/SignUpPage';
 import SignInPage from './Pages/SignInPage';
@@ -10,9 +10,11 @@ export const App = () => {
   return (
     <div className={css.app}>
       <div className={css.appContainer}>
-        <SignUpPage />
-        <MainPage />
-        <SignInPage />
+        <Routes>
+          <Route path="/signUp" element={<SignUpPage />} />
+          <Route path="/signIn" element={<SignInPage />} />
+          <Route path="/" element={<MainPage />} />
+        </Routes>
       </div>
     </div>
   );
