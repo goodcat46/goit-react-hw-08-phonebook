@@ -8,7 +8,7 @@ import {
   OutlinedInput,
   IconButton,
 } from '@mui/material';
-import authThunks from 'redux/userApi/authThunks';
+import authThunks from 'redux/thunks/authThunks';
 import { useDispatch } from 'react-redux';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { fetchDeleteContact } from 'redux/contactThunk';
+import { fetchDeleteContact } from 'redux/thunks/contactsThunks';
 
 import css from './contact.module.css';
 
-const Contact = ({ id, name, phone }) => {
+const Contact = ({ id, name, number }) => {
   const [isDeleting, setDeleting] = useState(false);
   const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const Contact = ({ id, name, phone }) => {
   return (
     <li className={css.contact}>
       <span className={css.name}>{name}</span>
-      <span className={css.phone}>{phone}</span>
+      <span className={css.phone}>{number}</span>
       {isDeleting ? (
         <span className={css.process}>Deleting...</span>
       ) : (

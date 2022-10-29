@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { applyFilterAction } from 'redux/slices/sliceFilter';
-import { fetchAllContacts } from 'redux/contactThunk';
+import { fetchAllContacts } from 'redux/thunks/contactsThunks';
 
 import ContactList from 'components/ContactList/ContactList';
 

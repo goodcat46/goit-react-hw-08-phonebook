@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
 import { combineReducers } from '@reduxjs/toolkit';
 import { filterReducer } from './slices/sliceFilter';
-import { userReducer } from './userApi/authSlice';
+import { userReducer } from './slices/authSlice';
 import { contactsReducer } from './slices/sliceContacts';
 import {
   persistStore,

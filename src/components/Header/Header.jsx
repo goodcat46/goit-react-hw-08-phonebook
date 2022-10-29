@@ -1,14 +1,13 @@
 import React from 'react';
-// import PropTypes from 'prop-types'
 import NavBar from './NavBar/NavBar';
 import { useSelector } from 'react-redux';
-import { selectUserData } from 'redux/userApi/userSelectors';
+import { selectUserData } from 'redux/selectors';
 
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './Header.module.scss';
 
-const Header = props => {
+const Header = () => {
   const userinfo = useSelector(selectUserData);
 
   return (
@@ -23,7 +22,5 @@ const Header = props => {
     </div>
   );
 };
-
-// Header.propTypes = {}
 
 export default Header;

@@ -43,7 +43,7 @@ const ContactList = () => {
           </li>
         )}
         {filteredContacts.map(el => (
-          <Contact key={el.id} id={el.id} name={el.name} phone={el.phone} />
+          <Contact key={el.id} id={el.id} name={el.name} number={el.number} />
         ))}
         {filteredContacts.length === 0 && (
           <li className={css.notification}>

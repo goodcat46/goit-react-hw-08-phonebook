@@ -6,8 +6,8 @@ import SignUpPage from './Pages/SignUpPage';
 import SignInPage from './Pages/SignInPage';
 import NotFoundPage from './Pages/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
-import authThunks from 'redux/userApi/authThunks';
-import { selectUserData } from 'redux/userApi/userSelectors';
+import authThunks from 'redux/thunks/authThunks';
+import { selectUserData } from 'redux/selectors';
 
 import css from './app.module.scss';
 

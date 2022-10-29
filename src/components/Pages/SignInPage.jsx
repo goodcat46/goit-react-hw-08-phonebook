@@ -9,7 +9,7 @@ import {
   IconButton,
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import authThunks from 'redux/userApi/authThunks';
+import authThunks from 'redux/thunks/authThunks';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignInPage.module.scss';

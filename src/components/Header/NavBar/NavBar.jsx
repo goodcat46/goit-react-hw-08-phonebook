@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectUserData } from 'redux/userApi/userSelectors';
+import { selectUserData } from 'redux/selectors';
 // import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import authThunks from 'redux/userApi/authThunks';
+import authThunks from 'redux/thunks/authThunks';
 
 import scss from './NavBar.module.scss';
 

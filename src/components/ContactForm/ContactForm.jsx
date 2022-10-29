@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddContact } from 'redux/contactThunk';
+import { fetchAddContact } from 'redux/thunks/contactsThunks';
 import { selectAllContacts } from 'redux/selectors';
 
 import css from './contactForm.module.css';
@@ -29,7 +29,7 @@ const ContactForm = () => {
       dispatch(
         fetchAddContact({
           name: inputName,
-          phone: inputNumber,
+          number: inputNumber,
         })
       );
     } else {

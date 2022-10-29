@@ -1,14 +1,6 @@
 import userApi from '../../services/userApi';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-const token = {
-  set(token) {
-    userApi.defaults.headers.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    userApi.defaults.headers.Authorization = ``;
-  },
-};
+import { token } from '../../services/userApi';
 
 const userRegister = createAsyncThunk(
   'auth/register',
