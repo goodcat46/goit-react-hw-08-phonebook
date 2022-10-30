@@ -1,9 +1,7 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { applyFilterAction } from 'redux/slices/sliceFilter';
 import { fetchAllContacts } from 'redux/thunks/contactsThunks';
-import { useSelector } from 'react-redux';
 import { selectUserData } from 'redux/selectors';
 
 import ContactList from 'components/ContactList/ContactList';

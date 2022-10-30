@@ -24,7 +24,7 @@ const SignUpPage = () => {
     email: '',
     password: '',
   });
-  const { isLoggedIn } = useSelector(selectUserData);
+  const { isLoggedIn, token } = useSelector(selectUserData);
   const navigateTo = useNavigate();
 
   const dispatch = useDispatch();
@@ -47,17 +47,23 @@ const SignUpPage = () => {
         password: values.password,
       })
     );
+    setValues({
+      login: '',
+      email: '',
+      password: '',
+    });
   };
+
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && token) {
       navigateTo('/contacts');
     }
-  });
+  }, [isLoggedIn, navigateTo, token]);
   return (
     <div className={scss.signUpPage}>
       <div className={scss.wrapper}>
         <LetterAvatar login={values.login} />
-        <p className={scss.pageName}>Registration</p>
+        <p className={scss.pageName}>Registration </p>
       </div>
       <form className={scss.signUpForm} onSubmit={handleSubmit}>
         <FormControl sx={{ width: '100%' }} variant="outlined">
