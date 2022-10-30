@@ -3,6 +3,7 @@ import {
   fetchAllContacts,
   fetchAddContact,
   fetchDeleteContact,
+  fetchEditContact,
 } from 'redux/thunks/contactsThunks';
 import { contacts } from 'redux/initialState';
 
@@ -44,6 +45,19 @@ export const contactsSlice = createSlice({
     },
 
     [fetchDeleteContact.pending](state, action) {
+      state.isLoading = true;
+    },
+
+    [fetchEditContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.lastEditedId = action.payload.id;
+    },
+    [fetchEditContact.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload.error;
+    },
+
+    [fetchEditContact.pending](state, action) {
       state.isLoading = true;
     },
   },

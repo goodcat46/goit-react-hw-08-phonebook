@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar/NavBar';
+import NavBar from './AppBar/AppBar';
 import { useSelector } from 'react-redux';
 import { selectUserData } from 'redux/selectors';
 
@@ -12,6 +12,7 @@ const Header = () => {
 
   return (
     <div className={scss.Header}>
+      <div className={scss.headerContainer}>
       {userinfo.isLoged && (
         <div className={scss.UserInfo}>
           <LetterAvatar login={userinfo.user.name} />
@@ -19,6 +20,7 @@ const Header = () => {
         </div>
       )}
       <NavBar />
+      </div>
     </div>
   );
 };

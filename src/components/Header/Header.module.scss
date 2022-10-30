@@ -1,17 +1,24 @@
 .Header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  min-height: 60px;
+  width: 100%;
+
+  background-color: #fff;
+
+  box-shadow: 0 0 5px rgba(122, 122, 122, 0.5);
+}
+.headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
-
-  position: sticky;
-  top: 0;
-  left: 0;
-
-  background-color: #fff;
+  padding: 10px;
 }
-.UserInfo{
+.UserInfo {
   display: flex;
   align-items: center;
   gap: 8px;

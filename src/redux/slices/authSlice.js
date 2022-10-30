@@ -22,6 +22,7 @@ export const userAuthSlice = createSlice({
     },
     [authThunks.register.rejected]: (state, action) => {
       state.isLoading = false;
+      state.error = action.payload.error;
     },
     [authThunks.register.pending]: (state, action) => {
       state.isLoading = true;
@@ -33,9 +34,10 @@ export const userAuthSlice = createSlice({
       state.user = payload.user;
       state.token = payload.token;
     },
-    [authThunks.logIn.rejected]: (state, { payload }) => {
+    [authThunks.logIn.rejected]: (state, action) => {
       state.isLoading = false;
       state.isLoged = false;
+      state.error = action.payload.error;
     },
     [authThunks.logIn.pending]: (state, { payload }) => {
       state.isLoading = true;
@@ -49,6 +51,7 @@ export const userAuthSlice = createSlice({
     },
     [authThunks.logOut.rejected]: (state, action) => {
       state.isLoading = true;
+      state.error = action.payload.error;
     },
     [authThunks.logOut.pending]: (state, action) => {
       state.isLoading = true;
@@ -61,6 +64,7 @@ export const userAuthSlice = createSlice({
     },
     [authThunks.current.rejected]: (state, action) => {
       state.isLoading = false;
+      state.error = action.payload.error;
     },
     [authThunks.current.pending]: (state, action) => {
       state.isLoading = true;

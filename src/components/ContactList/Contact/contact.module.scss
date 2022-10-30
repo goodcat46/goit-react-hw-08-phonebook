@@ -1,0 +1,66 @@
+.contact {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+
+  padding: 8px;
+  min-height: 30px;
+
+  box-shadow: 0 0 5px rgba(122, 122, 122, 0.5);
+}
+.form{
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 8px;
+}
+.process {
+  line-height: 1.2;
+}
+.contactData {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.input {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: 16px;
+}
+.button {
+  padding: 4px 8px;
+
+  min-width: 65px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(122, 122, 122, 0.5);
+  &.accept {
+    &:hover {
+      background-color: rgb(115, 255, 72);
+      box-shadow: 0 0 8px rgb(115, 255, 72);
+    }
+    &:active {
+      box-shadow: 0 0 3px rgb(115, 255, 72);
+    }
+  }
+  &.edit {
+    &:hover {
+      background-color: rgb(255, 249, 72);
+      box-shadow: 0 0 8px rgb(255, 249, 72);
+    }
+    &:active {
+      box-shadow: 0 0 3px rgb(255, 249, 72);
+    }
+  }
+  &.del {
+    &:hover {
+      background-color: rgb(255, 72, 72);
+      box-shadow: 0 0 8px rgba(255, 72, 72, 1);
+    }
+    &:active {
+      box-shadow: 0 0 3px rgba(255, 72, 72, 1);
+    }
+  }
+}

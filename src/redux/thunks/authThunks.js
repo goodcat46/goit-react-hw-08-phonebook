@@ -4,7 +4,7 @@ import { token } from '../../services/userApi';
 
 const userRegister = createAsyncThunk(
   'auth/register',
-  async ({ name, email, password }) => {
+  async ({ name, email, password }, thunkAPI) => {
     try {
       const response = await userApi.post(`/users/signup`, {
         name: name,
@@ -14,12 +14,13 @@ const userRegister = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 const userLogIn = createAsyncThunk(
   'auth/login',
-  async ({ email, password }) => {
+  async ({ email, password }, thunkAPI) => {
     try {
       const response = await userApi.post(`/users/login`, {
         email: email,
@@ -29,31 +30,32 @@ const userLogIn = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-const userLogOut = createAsyncThunk('auth/logout', async () => {
+const userLogOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await userApi.post(`/users/logout`);
     token.unset();
   } catch (error) {
     console.log(error);
+    return thunkAPI.rejectWithValue(error.message);
   }
 });
 
-const userCurrent = createAsyncThunk(
-  'auth/current',
-  async (_, { getState }) => {
-    token.set(getState().user.token);
-    try {
-      const { data } = await userApi.get(`/users/current`);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
+const userCurrent = createAsyncThunk('auth/current', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  token.set(state.auth.token);
+  try {
+    const { data } = await userApi.get(`/users/current`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return thunkAPI.rejectWithValue(error.message);
   }
-);
+});
 
 const authThunks = {
   register: userRegister,

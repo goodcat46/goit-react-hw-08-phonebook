@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import userApi from '../../services/userApi';
 
 export const fetchAllContacts = createAsyncThunk(
@@ -44,9 +43,12 @@ export const fetchDeleteContact = createAsyncThunk(
 export const fetchEditContact = createAsyncThunk(
   'contacts/fetchEditContact',
   async (editedContact, thunkAPI) => {
+    console.log(editedContact)
     try {
-      const response = await userApi.patch(`/contacts/${editedContact.id}`,editedContact.obj);
-
+      const response = await userApi.patch(
+        `/contacts/${editedContact.id}`,
+        editedContact.obj
+      );
       return response.data;
     } catch (error) {
       console.log(error);

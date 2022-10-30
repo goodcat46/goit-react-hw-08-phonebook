@@ -1,27 +1,28 @@
 .app {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 
-  /* max-height: 100vh; */
-
-  padding: 20px;
+  width: 100%;
 
   font-size: 14px;
   color: #010101;
 }
 .appContainer {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 8px;
 
+  margin: 20px auto;
+
   width: 100%;
+
   max-width: 600px;
   min-width: 320px;
   min-height: 200px;
 
-  padding: 8px;
+  padding: 16px 8px 16px;
 
   box-shadow: 0 0 5px rgba(122, 122, 122, 0.5);
 }
