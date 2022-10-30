@@ -46,11 +46,9 @@ const SignUpPage = () => {
   };
   return (
     <div className={scss.signUpPage}>
-      <div className={scss.userInfo}>
+      <div className={scss.wrapper}>
         <LetterAvatar login={values.login} />
-        <p className={scss.userName}>
-          {values.login ? values.login : 'User Name'}
-        </p>
+        <p className={scss.pageName}>Registration</p>
       </div>
       <form className={scss.signUpForm} onSubmit={handleSubmit}>
         <FormControl sx={{ width: '100%' }} variant="outlined">

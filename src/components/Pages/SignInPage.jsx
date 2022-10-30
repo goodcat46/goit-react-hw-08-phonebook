@@ -40,8 +40,9 @@ const SignInPage = () => {
   return (
     <>
       <div className={scss.signInPage}>
-        <div className={scss.userInfo}>
+        <div className={scss.wrapper}>
           <LetterAvatar />
+          <p className={scss.pageName}>Sign In</p>
         </div>
         <form className={scss.signInForm} onSubmit={handleSubmit}>
           <FormControl sx={{ width: '100%' }} variant="outlined">

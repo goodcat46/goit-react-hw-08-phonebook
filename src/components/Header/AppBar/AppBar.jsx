@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectUserData } from 'redux/selectors';
-// import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import authThunks from 'redux/thunks/authThunks';
+
+import { Button } from '@mui/material';
+import Navigation from './Navigation/Navigation';
 
 import scss from './NavBar.module.scss';
 
@@ -18,10 +19,7 @@ const NavBar = () => {
   return (
     <div className={scss.NavBar}>
       {!isLoged ? (
-        <>
-          <Button>Register</Button>
-          <Button>Log In</Button>
-        </>
+        <Navigation />
       ) : (
         <Button onClick={handleLogOutClick}>Log Out</Button>
       )}

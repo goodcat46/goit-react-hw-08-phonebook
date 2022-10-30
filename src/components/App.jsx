@@ -26,15 +26,14 @@ export const App = () => {
       <div className={css.app}>
         <Header />
         <div className={css.appContainer}>
-          {/* {isLoged ? <MainPage /> : <SignInPage />} */}
           <Routes>
-            <Route path="/signUp" element={<SignUpPage />} />
-            {/* <Route path="/" element={<MainPage />} /> */}
-            {isLoged ? (
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/signin" element={<SignInPage />} />
+            {/* {isLoged ? (
               <Route path="/" element={<MainPage />} />
             ) : (
               <Route path="/" element={<SignInPage />} />
-            )}
+            )} */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
