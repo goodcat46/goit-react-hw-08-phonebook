@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUserData } from 'redux/selectors';
 import { userCurrent } from 'redux/thunks/authThunks';
 
-import MainPage from './Pages/MainPage';
 import Header from './Header/Header';
+import HelloPage from './Pages/HelloPage';
+import ContactsPage from './Pages/ContactsPage';
 import SignUpPage from './Pages/SignUpPage';
 import SignInPage from './Pages/SignInPage';
 import NotFoundPage from './Pages/NotFoundPage';
@@ -28,9 +29,9 @@ export const App = () => {
         <Header />
         <div className={css.appContainer}>
           <Routes>
-            
+            <Route path="/" element={<HelloPage />} />
             <Route path="/signin" element={<SignInPage />} />
-            <Route path="/contacts" element={<MainPage />} />
+            <Route path="/contacts" element={<ContactsPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

@@ -6,7 +6,6 @@ import { userLogOut } from 'redux/thunks/authThunks';
 
 import { Button } from '@mui/material';
 import Navigation from './Navigation/Navigation';
-import { Link } from 'react-router-dom';
 
 import scss from './NavBar.module.scss';
 
@@ -23,9 +22,6 @@ const NavBar = () => {
         <Navigation />
       ) : (
         <>
-          <Link to={'/contacts'}>
-            <Button>Contacts</Button>
-          </Link>
           <Button onClick={handleLogOutClick}>Log Out</Button>
         </>
       )}

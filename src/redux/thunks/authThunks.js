@@ -57,10 +57,3 @@ export const userCurrent = createAsyncThunk('auth/current', async (_, thunkAPI) 
   }
 });
 
-const authThunks = {
-  registerUser: userRegister,
-  logInUser: userLogIn,
-  logOutUser: userLogOut,
-  currentUser: userCurrent,
-};
-export default authThunks;
