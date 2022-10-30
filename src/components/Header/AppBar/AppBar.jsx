@@ -10,7 +10,7 @@ import Navigation from './Navigation/Navigation';
 import scss from './NavBar.module.scss';
 
 const NavBar = () => {
-  const { isLoged } = useSelector(selectUserData);
+  const { isLoggedIn } = useSelector(selectUserData);
   const dispatch = useDispatch();
   const handleLogOutClick = () => {
     dispatch(userLogOut());
@@ -18,7 +18,7 @@ const NavBar = () => {
 
   return (
     <div className={scss.NavBar}>
-      {!isLoged ? (
+      {!isLoggedIn ? (
         <Navigation />
       ) : (
         <>

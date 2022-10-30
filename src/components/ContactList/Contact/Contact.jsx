@@ -85,11 +85,7 @@ const Contact = ({ id, name, number }) => {
             {isEditable ? 'Accept' : 'Edit'}
           </button>
         )}
-      </form>
-
-      {/* <span className={css.name}>{name}</span> */}
-      {/* <span className={css.number}>{number}</span> */}
-      {isDeleting ? (
+        {isDeleting ? (
         <span className={css.process}>Deleting...</span>
       ) : (
         <button
@@ -100,6 +96,7 @@ const Contact = ({ id, name, number }) => {
           Delete
         </button>
       )}
+      </form>      
     </li>
   );
 };

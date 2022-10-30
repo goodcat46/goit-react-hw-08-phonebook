@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { applyFilterAction } from 'redux/slices/sliceFilter';
 import { fetchAllContacts } from 'redux/thunks/contactsThunks';
+import { useSelector } from 'react-redux';
+import { selectUserData } from 'redux/selectors';
 
 import ContactList from 'components/ContactList/ContactList';
 
@@ -10,6 +12,7 @@ import css from './filter.module.css';
 
 const Filter = () => {
   const [filterInput, setFilterInput] = useState('');
+  const { token } = useSelector(selectUserData);
 
   const dispatch = useDispatch();
 
@@ -20,8 +23,10 @@ const Filter = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchAllContacts());
-  }, [dispatch]);
+    if (token) {
+      dispatch(fetchAllContacts());
+    }
+  }, [dispatch, token]);
   return (
     <div className={css.filter}>
       <form className={css.form}>

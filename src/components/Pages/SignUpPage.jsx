@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { userRegister } from 'redux/thunks/authThunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserData } from 'redux/selectors';
+import { useNavigate } from 'react-router-dom';
 import {
   FormControl,
   Button,
@@ -8,8 +12,7 @@ import {
   OutlinedInput,
   IconButton,
 } from '@mui/material';
-import { userRegister } from 'redux/thunks/authThunks';
-import { useDispatch } from 'react-redux';
+
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignUpPage.module.scss';
@@ -21,6 +24,8 @@ const SignUpPage = () => {
     email: '',
     password: '',
   });
+  const { isLoggedIn } = useSelector(selectUserData);
+  const navigateTo = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -30,7 +35,6 @@ const SignUpPage = () => {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
   const handleMouseDownPassword = event => {
     event.preventDefault();
   };
@@ -44,6 +48,11 @@ const SignUpPage = () => {
       })
     );
   };
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigateTo('/contacts');
+    }
+  });
   return (
     <div className={scss.signUpPage}>
       <div className={scss.wrapper}>
@@ -59,6 +68,7 @@ const SignUpPage = () => {
             value={values.login}
             onChange={handleChange('login')}
             label="Login"
+            required
           />
         </FormControl>
         <FormControl sx={{ width: '100%' }} variant="outlined">
@@ -69,6 +79,7 @@ const SignUpPage = () => {
             value={values.email}
             onChange={handleChange('email')}
             label="Email"
+            required
           />
         </FormControl>
         <FormControl sx={{ width: '100%' }} variant="outlined">
@@ -93,6 +104,7 @@ const SignUpPage = () => {
               </InputAdornment>
             }
             label="Password"
+            required
           />
         </FormControl>
         <Button variant="contained" type="submit">

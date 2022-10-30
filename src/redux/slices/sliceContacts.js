@@ -17,22 +17,24 @@ export const contactsSlice = createSlice({
     },
     [fetchAllContacts.rejected](state, action) {
       state.isLoading = false;
-      state.error = action.payload.error;
+      state.error = action.payload;
     },
     [fetchAllContacts.pending](state, action) {
       state.isLoading = true;
     },
+    
     [fetchAddContact.fulfilled](state, action) {
       state.isLoading = false;
       state.contacts = [action.payload, ...state.contacts];
     },
     [fetchAddContact.rejected](state, action) {
       state.isLoading = false;
-      state.error = action.payload.error;
+      state.error = action.payload;
     },
     [fetchAddContact.pending](state, action) {
       state.isLoading = true;
     },
+
     [fetchDeleteContact.fulfilled](state, action) {
       state.isLoading = false;
       state.contacts = state.contacts.filter(
@@ -41,9 +43,8 @@ export const contactsSlice = createSlice({
     },
     [fetchDeleteContact.rejected](state, action) {
       state.isLoading = false;
-      state.error = action.payload.error;
+      state.error = action.payload;
     },
-
     [fetchDeleteContact.pending](state, action) {
       state.isLoading = true;
     },
@@ -54,7 +55,7 @@ export const contactsSlice = createSlice({
     },
     [fetchEditContact.rejected](state, action) {
       state.isLoading = false;
-      state.error = action.payload.error;
+      state.error = action.payload;
     },
 
     [fetchEditContact.pending](state, action) {

@@ -9,7 +9,7 @@ import {
 const initialState = {
   user: { name: null, email: null },
   token: null,
-  isLoged: false,
+  isLoggedIn: false,
   error: null,
   isLoading: false,
 };
@@ -21,7 +21,7 @@ export const userAuthSlice = createSlice({
     //* РЕЄСТРАЦІЯ
     [userRegister.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.isLoged = false;
+      state.isLoggedIn = false;
       state.user = payload.user;
       state.token = payload.token;
     },
@@ -35,13 +35,13 @@ export const userAuthSlice = createSlice({
     //* ВХІД
     [userLogIn.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.isLoged = true;
+      state.isLoggedIn = true;
       state.user = payload.user;
       state.token = payload.token;
     },
     [userLogIn.rejected]: (state, action) => {
       state.isLoading = false;
-      state.isLoged = false;
+      state.isLoggedIn = false;
       state.error = action.payload.error;
     },
     [userLogIn.pending]: (state, { payload }) => {
@@ -50,7 +50,7 @@ export const userAuthSlice = createSlice({
     //* ВИХІД
     [userLogOut.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.isLoged = false;
+      state.isLoggedIn = false;
       state.user = initialState.user;
       state.token = null;
     },
@@ -64,7 +64,7 @@ export const userAuthSlice = createSlice({
     //* ПОТОЧНИЙ ЮЗЕР
     [userCurrent.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.isLoged = true;
+      state.isLoggedIn = true;
       state.user = payload;
     },
     [userCurrent.rejected]: (state, action) => {

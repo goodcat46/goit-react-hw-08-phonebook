@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogIn } from 'redux/thunks/authThunks';
+import { selectUserData } from 'redux/selectors';
+import { useNavigate } from 'react-router-dom';
 import {
   FormControl,
   Button,
@@ -8,12 +12,7 @@ import {
   OutlinedInput,
   IconButton,
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { userLogIn } from 'redux/thunks/authThunks';
-import { useSelector } from 'react-redux';
-import { selectUserData } from 'redux/selectors';
 
-import { Navigate } from 'react-router-dom';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignInPage.module.scss';
@@ -23,8 +22,9 @@ const SignInPage = () => {
     email: '',
     password: '',
   });
-  const { isLoged } = useSelector(selectUserData);
+  const { isLoggedIn } = useSelector(selectUserData);
   const dispatch = useDispatch();
+  const navigateTo = useNavigate();
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
@@ -40,9 +40,15 @@ const SignInPage = () => {
     evt.preventDefault();
     dispatch(userLogIn({ email: values.email, password: values.password }));
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigateTo('/contacts');
+    }
+  });
   return (
     <>
-      {isLoged && <Navigate to="/contacts" replace={true} />}
+      {/* {isLoggedIn && <Navigate to="/contacts" replace={true} />} */}
       <div className={scss.signInPage}>
         <div className={scss.wrapper}>
           <LetterAvatar />
