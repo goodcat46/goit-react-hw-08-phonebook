@@ -8,18 +8,17 @@ import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 import scss from './Header.module.scss';
 
 const Header = () => {
-  const userinfo = useSelector(selectUserData);
+  const { isLoged, user } = useSelector(selectUserData);
 
   return (
     <div className={scss.Header}>
       <div className={scss.headerContainer}>
-      {userinfo.isLoged && (
+        {/* {isLoged && ()} */}
         <div className={scss.UserInfo}>
-          <LetterAvatar login={userinfo.user.name} />
-          <p>{userinfo.user.email}</p>
+          <LetterAvatar login={user.name} />
+          <p>{isLoged?user.email:'Anonymus'}</p>
         </div>
-      )}
-      <NavBar />
+        <NavBar />
       </div>
     </div>
   );

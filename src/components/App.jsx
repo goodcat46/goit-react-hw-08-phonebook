@@ -8,12 +8,13 @@ import NotFoundPage from './Pages/NotFoundPage';
 import { useDispatch, useSelector } from 'react-redux';
 import authThunks from 'redux/thunks/authThunks';
 import { selectUserData } from 'redux/selectors';
+import AppLoader from './AppLoader/AppLoader';
 
 import css from './app.module.scss';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { token, isLoged } = useSelector(selectUserData);
+  const { token, isLoged, isLoading } = useSelector(selectUserData);
   useEffect(() => {
     if (token) {
       dispatch(authThunks.current());
@@ -23,7 +24,7 @@ export const App = () => {
   return (
     <>
       <div className={css.app}>
-      <Header />
+        <Header />
         <div className={css.appContainer}>
           {/* {isLoged ? <MainPage /> : <SignInPage />} */}
           <Routes>
@@ -37,6 +38,7 @@ export const App = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
+        <AppLoader isLoading={isLoading} />
       </div>
     </>
   );
