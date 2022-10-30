@@ -2,7 +2,7 @@ import userApi from '../../services/userApi';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { token } from '../../services/userApi';
 
-const userRegister = createAsyncThunk(
+export const userRegister = createAsyncThunk(
   'auth/register',
   async ({ name, email, password }, thunkAPI) => {
     try {
@@ -18,7 +18,7 @@ const userRegister = createAsyncThunk(
     }
   }
 );
-const userLogIn = createAsyncThunk(
+export const userLogIn = createAsyncThunk(
   'auth/login',
   async ({ email, password }, thunkAPI) => {
     try {
@@ -35,7 +35,7 @@ const userLogIn = createAsyncThunk(
   }
 );
 
-const userLogOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const userLogOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await userApi.post(`/users/logout`);
     token.unset();
@@ -45,7 +45,7 @@ const userLogOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-const userCurrent = createAsyncThunk('auth/current', async (_, thunkAPI) => {
+export const userCurrent = createAsyncThunk('auth/current', async (_, thunkAPI) => {
   const state = thunkAPI.getState();
   token.set(state.auth.token);
   try {
@@ -58,9 +58,9 @@ const userCurrent = createAsyncThunk('auth/current', async (_, thunkAPI) => {
 });
 
 const authThunks = {
-  register: userRegister,
-  logIn: userLogIn,
-  logOut: userLogOut,
-  current: userCurrent,
+  registerUser: userRegister,
+  logInUser: userLogIn,
+  logOutUser: userLogOut,
+  currentUser: userCurrent,
 };
 export default authThunks;

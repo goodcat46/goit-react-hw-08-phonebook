@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-const Navigation = props => {
+const Navigation = () => {
   return (
     <>
       <Link to={'/signup'}>
@@ -16,7 +15,5 @@ const Navigation = props => {
     </>
   );
 };
-
-Navigation.propTypes = {};
 
 export default Navigation;

@@ -9,7 +9,11 @@ import {
   IconButton,
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import authThunks from 'redux/thunks/authThunks';
+import { userLogIn } from 'redux/thunks/authThunks';
+import { useSelector } from 'react-redux';
+import { selectUserData } from 'redux/selectors';
+
+import { Navigate } from 'react-router-dom';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
 import scss from './SignInPage.module.scss';
@@ -19,6 +23,7 @@ const SignInPage = () => {
     email: '',
     password: '',
   });
+  const { isLoged } = useSelector(selectUserData);
   const dispatch = useDispatch();
 
   const handleChange = prop => event => {
@@ -33,12 +38,11 @@ const SignInPage = () => {
   };
   const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch(
-      authThunks.logIn({ email: values.email, password: values.password })
-    );
+    dispatch(userLogIn({ email: values.email, password: values.password }));
   };
   return (
     <>
+      {isLoged && <Navigate to="/contacts" replace={true} />}
       <div className={scss.signInPage}>
         <div className={scss.wrapper}>
           <LetterAvatar />

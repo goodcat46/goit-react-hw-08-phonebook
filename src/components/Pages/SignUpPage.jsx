@@ -8,7 +8,7 @@ import {
   OutlinedInput,
   IconButton,
 } from '@mui/material';
-import authThunks from 'redux/thunks/authThunks';
+import { userRegister } from 'redux/thunks/authThunks';
 import { useDispatch } from 'react-redux';
 import LetterAvatar from 'components/LetterAvatar/LetterAvatar';
 
@@ -37,7 +37,7 @@ const SignUpPage = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
     dispatch(
-      authThunks.register({
+      userRegister({
         name: values.login,
         email: values.email,
         password: values.password,
