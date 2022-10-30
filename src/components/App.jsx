@@ -23,9 +23,7 @@ export const App = () => {
   const dispatch = useDispatch();
   const { token, isLoading, isloggedIn } = useSelector(selectUserData);
   useEffect(() => {
-    if (!isloggedIn) {
-      return;
-    } else if (token) {
+    if (token) {
       dispatch(userCurrent());
     }
   }, [dispatch, isloggedIn, token]);
