@@ -21,12 +21,14 @@ const ContactsPage = lazy(() => import('./Pages/ContactsPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { token, isLoading } = useSelector(selectUserData);
+  const { token, isLoading, isloggedIn } = useSelector(selectUserData);
   useEffect(() => {
-    if (token) {
+    if (!isloggedIn) {
+      return;
+    } else if (token) {
       dispatch(userCurrent());
     }
-  }, [dispatch, token]);
+  }, [dispatch, isloggedIn, token]);
 
   return (
     <div className={css.app}>

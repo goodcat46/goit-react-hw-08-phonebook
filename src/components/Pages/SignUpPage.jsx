@@ -55,10 +55,10 @@ const SignUpPage = () => {
   };
 
   useEffect(() => {
-    if (isLoggedIn && token) {
+    if (token) {
       navigateTo('/contacts');
     }
-  }, [isLoggedIn, navigateTo, token]);
+  }, [navigateTo, token]);
   return (
     <div className={scss.signUpPage}>
       <div className={scss.wrapper}>
