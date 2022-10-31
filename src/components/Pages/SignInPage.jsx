@@ -43,60 +43,58 @@ const SignInPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigateTo('/contacts');
+      navigateTo('/contacts', { replace: true });
+      return;
     }
   });
   return (
-    <>
-      {/* {isLoggedIn && <Navigate to="/contacts" replace={true} />} */}
-      <div className={scss.signInPage}>
-        <div className={scss.wrapper}>
-          <LetterAvatar />
-          <p className={scss.pageName}>Sign In</p>
-        </div>
-        <form className={scss.signInForm} onSubmit={handleSubmit}>
-          <FormControl sx={{ width: '100%' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-email"
-              type={'email'}
-              value={values.email}
-              onChange={handleChange('email')}
-              label="Email"
-              required
-            />
-          </FormControl>
-          <FormControl sx={{ width: '100%' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? 'text' : 'password'}
-              value={values.password}
-              onChange={handleChange('password')}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-              required
-            />
-          </FormControl>
-          <Button variant="contained" type="submit">
-            Sign In
-          </Button>
-        </form>
+    <div className={scss.signInPage}>
+      <div className={scss.wrapper}>
+        <LetterAvatar />
+        <p className={scss.pageName}>Sign In</p>
       </div>
-    </>
+      <form className={scss.signInForm} onSubmit={handleSubmit}>
+        <FormControl sx={{ width: '100%' }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-email">Email</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-email"
+            type={'email'}
+            value={values.email}
+            onChange={handleChange('email')}
+            label="Email"
+            required
+          />
+        </FormControl>
+        <FormControl sx={{ width: '100%' }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">
+            Password
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+            required
+          />
+        </FormControl>
+        <Button variant="contained" type="submit">
+          Sign In
+        </Button>
+      </form>
+    </div>
   );
 };
 

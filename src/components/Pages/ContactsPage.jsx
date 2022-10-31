@@ -16,7 +16,8 @@ const ContactsPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigateTo('/signin');
+      navigateTo('/signin', { replace: true });
+      return
     }
   });
   return (

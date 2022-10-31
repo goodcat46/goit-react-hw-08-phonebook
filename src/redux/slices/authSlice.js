@@ -22,8 +22,8 @@ export const userAuthSlice = createSlice({
     [userRegister.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.isLoggedIn = false;
-      state.user = payload.user;
-      state.token = payload.token;
+      // state.user = payload.user;
+      // state.token = payload.token;
     },
     [userRegister.rejected]: (state, action) => {
       state.isLoading = false;

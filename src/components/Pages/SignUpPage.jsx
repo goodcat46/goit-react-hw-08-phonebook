@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { userRegister } from 'redux/thunks/authThunks';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUserData } from 'redux/selectors';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   FormControl,
@@ -24,7 +23,6 @@ const SignUpPage = () => {
     email: '',
     password: '',
   });
-  const { isLoggedIn, token } = useSelector(selectUserData);
   const navigateTo = useNavigate();
 
   const dispatch = useDispatch();
@@ -38,15 +36,23 @@ const SignUpPage = () => {
   const handleMouseDownPassword = event => {
     event.preventDefault();
   };
-  const handleSubmit = evt => {
+  const handleSubmit = async evt => {
     evt.preventDefault();
-    dispatch(
-      userRegister({
-        name: values.login,
-        email: values.email,
-        password: values.password,
-      })
-    );
+    try {
+      await dispatch(
+        userRegister({
+          name: values.login,
+          email: values.email,
+          password: values.password,
+        })
+      )
+        .unwrap()
+        .then(() => {
+          navigateTo('/contacts');
+        });
+    } catch (error) {
+      console.log(error);
+    }
     setValues({
       login: '',
       email: '',
@@ -54,11 +60,6 @@ const SignUpPage = () => {
     });
   };
 
-  useEffect(() => {
-    if (token) {
-      navigateTo('/contacts');
-    }
-  }, [navigateTo, token]);
   return (
     <div className={scss.signUpPage}>
       <div className={scss.wrapper}>

@@ -9,7 +9,8 @@ const HelloPage = () => {
   const navigateTo = useNavigate();
   useEffect(() => {
     if (isLoggedIn) {
-      navigateTo('/contacts');
+      navigateTo('/contacts', { replace: true });
+      return
     }
   });
   return <div className={scss.Hello}>Hello!</div>;
