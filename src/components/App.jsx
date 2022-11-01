@@ -4,7 +4,7 @@ import { selectUserData } from 'redux/selectors';
 import { userCurrent } from 'redux/thunks/authThunks';
 import { Routes, Route } from 'react-router-dom';
 
-// import PrivateRoute from './Routes/PrivateRoute';
+import PrivateRoute from './Routes/PrivateRoute';
 // import PublicRoute from './Routes/PublicRoute';
 
 import Header from './Header/Header';
@@ -15,6 +15,8 @@ import SignInPage from './Pages/SignInPage';
 import NotFoundPage from './Pages/NotFoundPage';
 import AppLoader from './AppLoader/AppLoader';
 
+import { useMediaQuery } from 'react-responsive';
+
 import css from './app.module.scss';
 
 const ContactsPage = lazy(() => import('./Pages/ContactsPage'));
@@ -22,6 +24,20 @@ const ContactsPage = lazy(() => import('./Pages/ContactsPage'));
 export const App = () => {
   const dispatch = useDispatch();
   const { token, isLoading } = useSelector(selectUserData);
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1224px)',
+  });
+  const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' });
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+  const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
+  const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' });
+
+  console.log(isDesktopOrLaptop, 'isDesktopOrLaptop');
+  console.log(isBigScreen, 'isBigScreen');
+  console.log(isTabletOrMobile, 'isTabletOrMobile');
+  console.log(isPortrait, 'isPortrait');
+  console.log(isRetina, 'isRetina');
+
   useEffect(() => {
     if (token) {
       dispatch(userCurrent());
@@ -32,20 +48,21 @@ export const App = () => {
     <div className={css.app}>
       <Header />
       <div className={css.appContainer}>
-        <Routes>
-          <Route path="/" element={<HelloPage />} />
-          <Route path="/signin" element={<SignInPage />} />
-          <Route
-            path="/contacts"
-            element={
-              <Suspense>
-                <ContactsPage />
-              </Suspense>
-            }
-          />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <Suspense>
+          <Routes>
+            <Route path="/" element={<HelloPage />} />
+            <Route path="signin" element={<SignInPage />} />
+            <Route
+              path="/"
+              element={<PrivateRoute redirectTo="/signin" />}
+            >
+              <Route path="contacts" element={<ContactsPage />}></Route>
+
+            </Route>
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
       </div>
       <AppLoader isLoading={isLoading} />
     </div>
